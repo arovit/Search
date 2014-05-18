@@ -5,12 +5,10 @@ Search
 A small utility to do substring search on a large file containing millions of strings.
 It uses trie trees to perform the search.
 
-Limitation
-----------
+Usage
+-----
 
-Current limitation is that it works for files with pattern - "string" , number 
+Usage: search_engine.py [options] search_word1 search_word2  ... 
 
-
-So the substring matches are performed only on the "string" part 
-
+For options do - search_engine.py --help
 
