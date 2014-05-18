@@ -8,7 +8,7 @@ __Author__ = "Arovit Narula <arovit.kv@gmail.com>"
 Input: 
 
 1. File containing lines with format
-<spaces separated names>, <number> 
+<spaces separated strings> 
 2. Search strings - Interactive mode 
 
 Output:
@@ -126,19 +126,16 @@ class ParseStore:       			 # Old classes are sufficient
                 del temp_dict
                 temp_dict = dict()
             try:
-                first_name, last_name = line.split(',')[0].strip().split(' ')
-                first_name = first_name.strip()
-                last_name = last_name.strip()
+                strings = line.split(' ')
             except Exception, e: 
                 logger.critical("Error while parsing line '%s', Skipping this line.."%line)
                 continue 
-            fsubs = generate_substrings(first_name)
-            lsubs = generate_substrings(last_name)
-            t1 = time.time()
-            make_trie(fsubs, line, temp_dict)
-            make_trie(lsubs, line, temp_dict)
-            t2 = time.time()
-            count = count + 1
+            for strng in strings:  
+                fsubs = generate_substrings(strng)
+                t1 = time.time()
+                make_trie(fsubs, line, temp_dict)
+                t2 = time.time()
+                count = count + 1
 
         dsfile = os.path.join(self.datastore_directory , str(count)+'.db')
         file_db = shelve.open(dsfile,  writeback=True)
